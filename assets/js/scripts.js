@@ -17,7 +17,20 @@ function newGame(){
             plateau[i][j] = 0;
         }
     }
-    numJoueur = 1;
-    afficheTextAnnonce("Le jeu commence ! C'est au tour du joueur "+nomJoueur(numJoueur));
+    var joueur = 1;
+    afficheTextAnnonce("Le jeu commence ! C'est au tour du joueur "+nomDuJoueur(joueur)); //numJoueur
     jeu = true;
+    creerTableau();
+}
+
+function afficheTextAnnonce(text) {
+    document.getElementById('text-annonce').innerHTML = text;
+}
+
+function nomDuJoueur(numJoueur){
+    if (numJoueur == 1) {
+        return "rouge";
+    } else {
+        return "bleu";
+    }
 }
