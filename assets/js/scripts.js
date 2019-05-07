@@ -2,7 +2,7 @@ var numJoueur = 1;
 var nbColonnes = 5;
 var nbLines = 5;
 var jeu = true;
-var text = "";
+var texte = "";
 var plateau = [];
 
 for (var i = 0; i < nbLines; i++) {
@@ -33,4 +33,23 @@ function nomDuJoueur(numJoueur){
     } else {
         return "bleu";
     }
+}
+
+function creerTableau(){
+    texte = "<table>";
+    for (var i = 0; i < nbLines; i++) {
+        texte += "<tr>";
+        for (var j = 0; j < nbColonnes; j++) {
+            texte += "<td onclick='detectClic("+j+")' id="+i+"-"+j+">";
+            if (plateau[i][j] == 1) {
+                texte += "<div class='joueur1'></div>";
+            } else if (plateau[i][j] == 2) {
+                texte += "<div class='joueur2'></div>";
+            }
+            texte += "</td>";
+        }
+        texte += "</tr>";
+    }
+    texte += "</table>";
+    document.getElementById('puissance4').innerHTML = texte;
 }
