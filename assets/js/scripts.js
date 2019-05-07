@@ -17,8 +17,8 @@ function newGame(){
             plateau[i][j] = 0;
         }
     }
-    var joueur = 1;
-    afficheTextAnnonce("Le jeu commence ! C'est au tour du joueur "+nomDuJoueur(joueur)); //numJoueur
+    var numJoueur = 1;
+    afficheTextAnnonce("Le jeu commence ! C'est au tour du joueur "+nomDuJoueur(numJoueur)); //numJoueur
     jeu = true;
     creerTableau();
 }
@@ -40,7 +40,7 @@ function creerTableau(){
     for (var i = 0; i < nbLines; i++) {
         texte += "<tr>";
         for (var j = 0; j < nbColonnes; j++) {
-            texte += "<td onclick='detectClic("+j+")' id="+i+"-"+j+">";
+            texte += "<td onclick='detectClic("+j+")' id='"+i+"-"+j+"'>";
             if (plateau[i][j] == 1) {
                 texte += "<div class='joueur1'></div>";
             } else if (plateau[i][j] == 2) {
