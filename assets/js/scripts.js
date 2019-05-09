@@ -12,14 +12,14 @@ for (var i = 0; i < nbLines; i++) {
 newGame();
 
 function newGame(){
-    for (var i = 0; i < nbLines; i++) {
-        for (var j = 0; j < nbColonnes; j++) {
+    for (var i = 0; i < nbLines; i++) { //this.nbLines
+        for (var j = 0; j < nbColonnes; j++) { //this.nbColonnes
             plateau[i][j] = 0;
         }
     }
-    var numJoueur = 1;
-    afficheTextAnnonce("Le jeu commence ! C'est au tour du joueur "+nomDuJoueur(numJoueur)); //numJoueur
-    jeu = true;
+    var numJoueur = 1; //this.numJoueur
+    afficheTextAnnonce("Le jeu commence ! C'est au tour du joueur "+nomDuJoueur(numJoueur)); //this.numJoueur
+    jeu = true; //this.jeu
     creerTableau();
 }
 
@@ -96,5 +96,32 @@ function refreshTab(x, y, i){
 
 function puissance4(ligne, colonne, l, c){
     console.log('valeur : '+ligne+' '+colonne+' / incremente '+l+' '+c);
-    return false;
+    if (c == 0 && l == 0) {
+        //horizontal
+        var va = 1 + puissance4(ligne, colonne-1, 0, -1) + puissance4(ligne, colonne+1, 0, 1);
+        //vertical
+        var vb = 1 + puissance4(ligne-1, colonne, -1, 0) + puissance4(ligne+1, colonne, 1, 0);
+        //diag gauche
+        var vc = 1 + puissance4(ligne-1, colonne-1, -1, -1) + puissance4(ligne+1, colonne+1, 1, 1);
+        //diag droite
+        var vd = 1 + puissance4(ligne-1, colonne+1, -1, +1) + puissance4(ligne+1, colonne-1, 1, -1);
+
+        console.log(va,vb,vc,vd);
+        if (va == 4 || vb == 4 || vc == 4 || vd == 4) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    if (ligne < nbLines && ligne >= 0 && colonne < nbColonnes && colonne >= 0) {
+        console.log('valeur : '+ligne+' '+colonne+' / incremente '+l+' '+c);
+        if (plateau[ligne][colonne] == numJoueur) {
+            return 1 + puissance4(ligne + l, colonne + c, l, c);
+        } else {
+            return 0;
+        }
+    }
+    return 0;
 }
+
